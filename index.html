@@ -1029,7 +1029,7 @@ body {
 
         <!-- Cost breakdown table -->
         <div>
-          <div class="section-title-bar"><span class="section-no">1</span> コスト構成比較</div>
+          <div class="section-title-bar"><span class="section-no">1</span> コスト構成比較（100名・20チーム規模）</div>
           <table class="tbl">
             <thead>
               <tr>
@@ -1041,23 +1041,23 @@ body {
             <tbody>
               <tr>
                 <td class="td-left td-bold">エージェントライセンス</td>
-                <td class="td-green">¥1,200万/年<br><span style="font-size:10px;">(5名1チーム)</span></td>
-                <td class="td-red">数億円〜<br><span style="font-size:10px;">(開発費)</span></td>
+                <td class="td-green">¥2億4,000万/年<br><span style="font-size:10px;">(100名・20チーム)</span></td>
+                <td class="td-red">¥数十億〜<br><span style="font-size:10px;">(開発費)</span></td>
               </tr>
               <tr>
                 <td class="td-left td-bold">Gen AIエンジン費用</td>
                 <td class="td-green">¥0<br><span style="font-size:10px;">(Claude Enterprise活用)</span></td>
-                <td class="td-red">月数百万円<br><span style="font-size:10px;">(別途AIエンジン費用)</span></td>
+                <td class="td-red">月数百万円〜<br><span style="font-size:10px;">(別途AIエンジン費用)</span></td>
               </tr>
               <tr>
                 <td class="td-left td-bold">インフラ費用</td>
                 <td class="td-green">¥0<br><span style="font-size:10px;">(Claude連携)</span></td>
-                <td class="td-red">数千万円<br><span style="font-size:10px;">(サーバー構築)</span></td>
+                <td class="td-red">数千万円〜<br><span style="font-size:10px;">(サーバー構築・運用)</span></td>
               </tr>
               <tr style="background:#fff8e6;">
                 <td class="td-left td-bold" style="color:var(--navy);">年間TCO（総保有コスト）</td>
-                <td class="td-green" style="font-size:16px;">¥1,200万</td>
-                <td class="td-red" style="font-size:16px;">数億円〜</td>
+                <td class="td-green" style="font-size:16px;">¥2億4,000万</td>
+                <td class="td-red" style="font-size:16px;">¥20億〜30億</td>
               </tr>
             </tbody>
           </table>
@@ -1068,38 +1068,38 @@ body {
           <div class="section-title-bar"><span class="section-no">2</span> TCOビジュアル比較</div>
           <div class="tco-block">
             <div class="tco-title">
-              <span style="color:var(--green)">■</span> 年間 TCO（Total Cost of Ownership）
+              <span style="color:var(--green)">■</span> 年間 TCO（Total Cost of Ownership）― 100名規模
             </div>
 
             <div class="tco-bar-wrap">
               <div class="tco-bar-label">
                 <span style="font-weight:700; color:var(--green);">PARVIS方式</span>
-                <span style="color:var(--green); font-weight:700;">¥1,200万</span>
+                <span style="color:var(--green); font-weight:700;">¥2億4,000万</span>
               </div>
               <div class="tco-bar-outer">
-                <div class="tco-bar-inner" style="width:18%; background:var(--green);">¥1,200万</div>
+                <div class="tco-bar-inner" style="width:22%; background:var(--green);">¥2.4億</div>
               </div>
             </div>
 
             <div class="tco-bar-wrap" style="margin-top:12px;">
               <div class="tco-bar-label">
                 <span style="font-weight:700; color:var(--red);">スクラッチ開発（参考）</span>
-                <span style="color:var(--red); font-weight:700;">¥5,000万〜数億円</span>
+                <span style="color:var(--red); font-weight:700;">¥20億〜30億円</span>
               </div>
               <div class="tco-bar-outer">
-                <div class="tco-bar-inner" style="width:82%; background:var(--red);">¥5,000万〜数億円</div>
+                <div class="tco-bar-inner" style="width:88%; background:var(--red);">¥20億〜30億円</div>
               </div>
             </div>
 
             <div style="margin-top:16px; padding:12px; background:#e8f5ee; border-radius:8px; text-align:center;">
-              <div style="font-size:22px; font-weight:800; color:var(--green);">最大 1/10 以下</div>
-              <div style="font-size:12px; color:var(--sub); margin-top:4px;">PARVIS方式のコスト優位性（年間TCO比較）</div>
+              <div style="font-size:22px; font-weight:800; color:var(--green);">約 1/8 程度</div>
+              <div style="font-size:12px; color:var(--sub); margin-top:4px;">PARVIS方式のコスト優位性（100名規模・年間TCO比較）</div>
             </div>
           </div>
 
           <div class="warn-highlight" style="margin-top:12px;">
             <strong>Claude Enterpriseとの相乗効果:</strong><br>
-            テクノプロ様が4月に導入予定のClaudeが「AIエンジン」となるため、PARVIS導入時の純増コストは ライセンス費用（¥1,200万/年）のみです。
+            テクノプロ様が4月に導入予定のClaudeが「AIエンジン」となるため、PARVIS 100名・20チーム導入時の純増コストはライセンス費用（<strong>¥2億4,000万/年</strong>）のみです。
           </div>
         </div>
 
@@ -1120,34 +1120,26 @@ body {
     </div>
     <div class="slide-content">
 
-      <div class="grid-2" style="grid-template-rows: 1fr 1fr; height: 100%;">
+      <div style="display:flex; flex-direction:column; gap:14px; height:100%;">
         <!-- 1 -->
-        <div class="card" style="display:flex; gap:14px; align-items:flex-start;">
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; flex:1;">
           <div class="ns-num">1</div>
           <div class="ns-body">
             <h4>契約条件・スコープの最終合意</h4>
-            <p>年間 or 6ヶ月、チーム規模、開始時期について本日中に方向性を確認。4月稼働に向けた逆算スケジュールを設定します。</p>
+            <p>チーム規模、開始時期について本日中に方向性を確認。4月稼働に向けた逆算スケジュールを設定します。</p>
           </div>
         </div>
         <!-- 2 -->
-        <div class="card" style="display:flex; gap:14px; align-items:flex-start;">
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; flex:1;">
           <div class="ns-num">2</div>
-          <div class="ns-body">
-            <h4>契約書ドラフトの送付</h4>
-            <p>合意内容を反映した契約書初稿を1週間以内にお送りします。テクノプロ様の法務・調達部門との確認に備えたドラフトをご提供します。</p>
-          </div>
-        </div>
-        <!-- 3 -->
-        <div class="card" style="display:flex; gap:14px; align-items:flex-start;">
-          <div class="ns-num">3</div>
           <div class="ns-body">
             <h4>FDE教育プランのカスタマイズ提案</h4>
             <p>AICOE 5名の方々のスキルレベルと業務内容に合わせた最適なレベル構成・スケジュールをご提案します。正式見積もりも併せて提出します。</p>
           </div>
         </div>
-        <!-- 4 -->
-        <div class="card" style="display:flex; gap:14px; align-items:flex-start;">
-          <div class="ns-num">4</div>
+        <!-- 3 -->
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; flex:1;">
+          <div class="ns-num">3</div>
           <div class="ns-body">
             <h4>インフラ要件チェックリストの提供</h4>
             <p>IT部門向けのPARVIS導入要件書（1〜2ページ）をご提供します。Claude Enterprise連携の確認事項を網羅した簡潔な書類です。</p>
