@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PopcornSAR × TechnoPro — 2026.03.16</title>
+<style>
+:root {
+  --navy:   #0f2a4a;
+  --blue:   #1a5fa8;
+  --sky:    #2e8fd6;
+  --accent: #e8a020;
+  --green:  #1e8a5a;
+  --red:    #c0392b;
+  --light:  #eaf4fb;
+  --bg:     #f4f7fb;
+  --white:  #ffffff;
+  --text:   #1a2533;
+  --sub:    #5a6a7a;
+  --border: #d0dce8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ========== SLIDE SYSTEM ========== */
+.deck { width:100%; height:100vh; position:relative; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.slide.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* ========== TOP NAV ========== */
+.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 44px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.topnav-left { display:flex; align-items:center; gap:10px; }
+.logo-dot {
+  width:28px; height:28px;
+  background: linear-gradient(135deg, var(--sky), var(--accent));
+  border-radius: 6px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:800; color:white;
+}
+.topnav-title { color:rgba(255,255,255,.85); font-size:13px; font-weight:500; }
+.topnav-center {
+  display: flex;
+  gap: 4px;
+}
+.nav-dot {
+  width:8px; height:8px;
+  border-radius:50%;
+  background: rgba(255,255,255,.25);
+  cursor: pointer;
+  transition: background .2s;
+}
+.nav-dot.active { background: var(--accent); }
+.topnav-right { display:flex; align-items:center; gap:8px; }
+.nav-btn {
+  background: rgba(255,255,255,.12);
+  border: none;
+  color: white;
+  padding: 5px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background .2s;
+}
+.nav-btn:hover { background: rgba(255,255,255,.25); }
+.slide-counter { color:rgba(255,255,255,.5); font-size:11px; min-width:40px; text-align:center; }
+
+/* slide content area (below topnav) */
+.slide-body {
+  margin-top: 44px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== COVER SLIDE ========== */
+#s0 .slide-body {
+  background: linear-gradient(145deg, var(--navy) 0%, #1a4a80 55%, #0d3060 100%);
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.cover-bg-circle {
+  position:absolute;
+  border-radius:50%;
+  opacity:.07;
+  background:white;
+}
+.cover-inner {
+  text-align:center;
+  z-index:1;
+  padding: 20px;
+}
+.cover-badge {
+  display:inline-block;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  color:rgba(255,255,255,.8);
+  padding:5px 18px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+}
+.cover-main {
+  font-size:52px;
+  font-weight:800;
+  color:white;
+  line-height:1.1;
+  margin-bottom:12px;
+  letter-spacing:-1px;
+}
+.cover-sub {
+  font-size:20px;
+  color:rgba(255,255,255,.7);
+  margin-bottom:30px;
+  font-weight:300;
+}
+.cover-divider {
+  width:60px; height:3px;
+  background:var(--accent);
+  margin: 0 auto 24px;
+  border-radius:2px;
+}
+.cover-meta {
+  display:flex;
+  gap:32px;
+  justify-content:center;
+}
+.cover-meta-item {
+  color:rgba(255,255,255,.6);
+  font-size:12px;
+}
+.cover-meta-item strong {
+  display:block;
+  color:white;
+  font-size:14px;
+  margin-bottom:2px;
+}
+
+/* ========== GENERIC LAYOUT ========== */
+.slide-header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.slide-header-left { display:flex; align-items:center; gap:12px; }
+.agenda-badge {
+  background: var(--navy);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+  white-space:nowrap;
+}
+.slide-title {
+  font-size:20px;
+  font-weight:700;
+  color: var(--navy);
+}
+.slide-content {
+  flex:1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 22px 36px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ========== CARDS ========== */
+.card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 18px 22px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+.card-title {
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--light);
+  display:flex; align-items:center; gap:7px;
+}
+.card-title .dot {
+  width:8px; height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+/* ========== GRID HELPERS ========== */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+.grid-4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; }
+
+/* ========== HIGHLIGHT BOX ========== */
+.highlight-box {
+  background: var(--light);
+  border-left: 4px solid var(--sky);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size:13px;
+  color:var(--navy);
+  line-height:1.7;
+}
+.warn-highlight {
+  background: #fff5e6;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size:13px;
+  color:#7a4000;
+  line-height:1.7;
+}
+
+/* ========== KPI BOXES ========== */
+.kpi {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px 18px;
+  text-align:center;
+  box-shadow:0 1px 4px rgba(0,0,0,.05);
+}
+.kpi-value {
+  font-size:28px;
+  font-weight:800;
+  color:var(--navy);
+  line-height:1.1;
+  letter-spacing:-1px;
+}
+.kpi-label {
+  font-size:11px;
+  color:var(--sub);
+  margin-top:4px;
+  line-height:1.5;
+}
+.kpi-accent { color:var(--sky); }
+.kpi-green  { color:var(--green); }
+.kpi-red    { color:var(--red); }
+
+/* ========== TABLE ========== */
+.tbl {
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  font-size:12.5px;
+}
+.tbl thead th {
+  background:var(--navy);
+  color:white;
+  padding:9px 12px;
+  text-align:center;
+  font-weight:600;
+  font-size:12px;
+}
+.tbl td {
+  padding:9px 12px;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+  vertical-align:middle;
+}
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tr:nth-child(even) td { background:#f8fafc; }
+.tbl .td-left { text-align:left; }
+.tbl .td-bold { font-weight:700; color:var(--navy); }
+.tbl .td-price { font-weight:800; font-size:14px; color:var(--sky); }
+.tbl .td-green { font-weight:800; color:var(--green); }
+.tbl .td-red   { font-weight:800; color:var(--red); }
+
+/* ========== ARCH DIAGRAM ========== */
+.arch-row {
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:visible;
+}
+.arch-col {
+  flex:1;
+  padding:14px 16px;
+  text-align:center;
+  border-right:1px solid var(--border);
+}
+.arch-col:last-child { border-right:none; }
+.arch-col-hd {
+  font-size:11px;
+  font-weight:700;
+  color:white;
+  background:var(--navy);
+  padding:7px 10px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+.arch-col-body {
+  font-size:12px;
+  color:var(--sub);
+  line-height:1.8;
+}
+.arch-col-cost {
+  margin-top:10px;
+  font-size:14px;
+  font-weight:800;
+}
+.arch-arrow {
+  display:flex;
+  align-items:center;
+  color:var(--sky);
+  font-size:20px;
+  padding:0 4px;
+  flex-shrink:0;
+}
+
+/* ========== COMPARE BAR ========== */
+.compare-row {
+  display:flex;
+  gap:3px;
+  align-items:center;
+  margin-bottom:6px;
+}
+.compare-label {
+  width:120px;
+  flex-shrink:0;
+  font-size:12px;
+  color:var(--sub);
+  text-align:right;
+  padding-right:8px;
+}
+.compare-bar {
+  height:22px;
+  border-radius:4px;
+  display:flex;
+  align-items:center;
+  padding: 0 10px;
+  font-size:11px;
+  font-weight:700;
+  color:white;
+  white-space:nowrap;
+}
+
+/* ========== CONTRACT OPTIONS ========== */
+.contract-card {
+  border-radius:10px;
+  padding:18px 20px;
+  border:2px solid var(--border);
+  position:relative;
+  background:white;
+}
+.contract-card.recommended {
+  border-color:var(--sky);
+  box-shadow:0 0 0 3px rgba(46,143,214,.12);
+}
+.rec-badge {
+  position:absolute;
+  top:-11px; left:50%;
+  transform:translateX(-50%);
+  background:var(--sky);
+  color:white;
+  padding:3px 14px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.5px;
+  white-space:nowrap;
+}
+.contract-title {
+  font-size:15px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:6px;
+}
+.contract-price {
+  font-size:26px;
+  font-weight:800;
+  color:var(--sky);
+  letter-spacing:-1px;
+  line-height:1.1;
+}
+.contract-unit {
+  font-size:11px;
+  color:var(--sub);
+  margin-bottom:12px;
+}
+.check-list { list-style:none; }
+.check-list li {
+  font-size:12px;
+  color:var(--text);
+  padding:3px 0;
+  display:flex;
+  align-items:flex-start;
+  gap:7px;
+  line-height:1.5;
+}
+.check-list li::before {
+  content:'✓';
+  color:var(--green);
+  font-weight:800;
+  font-size:11px;
+  flex-shrink:0;
+  margin-top:2px;
+}
+
+/* ========== EDUCATION LEVEL CARDS ========== */
+.edu-card {
+  border-radius:10px;
+  padding:16px 18px;
+  background:white;
+  border:1px solid var(--border);
+}
+.edu-lv-badge {
+  display:inline-block;
+  padding:3px 12px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+  color:white;
+  margin-bottom:10px;
+}
+.edu-price {
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-0.5px;
+  line-height:1.1;
+}
+.edu-unit { font-size:11px; color:var(--sub); margin-bottom:10px; }
+.edu-total {
+  font-size:13px;
+  font-weight:700;
+  margin-top:6px;
+}
+
+/* ========== TIMELINE ========== */
+.timeline {
+  display:flex;
+  gap:0;
+  position:relative;
+  margin-top:4px;
+}
+.timeline::before {
+  content:'';
+  position:absolute;
+  top:22px; left:0; right:0;
+  height:3px;
+  background:linear-gradient(to right, var(--sky), var(--accent));
+  z-index:0;
+}
+.tl-item {
+  flex:1;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+.tl-dot {
+  width:16px; height:16px;
+  border-radius:50%;
+  background:white;
+  border:3px solid var(--sky);
+  margin:14px auto 8px;
+}
+.tl-dot.done { background:var(--sky); }
+.tl-dot.target { background:var(--accent); border-color:var(--accent); }
+.tl-month {
+  font-size:12px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+.tl-desc {
+  font-size:10.5px;
+  color:var(--sub);
+  line-height:1.5;
+  padding:0 4px;
+}
+
+/* ========== TCO VISUAL ========== */
+.tco-block {
+  border-radius:10px;
+  padding:18px 20px;
+  background:white;
+  border:2px solid var(--border);
+}
+.tco-title {
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:14px;
+  display:flex; align-items:center; gap:8px;
+}
+.tco-bar-wrap { margin-bottom:8px; }
+.tco-bar-label {
+  font-size:11px;
+  color:var(--sub);
+  margin-bottom:3px;
+  display:flex;
+  justify-content:space-between;
+}
+.tco-bar-outer {
+  background:#eee;
+  border-radius:6px;
+  height:24px;
+  overflow:hidden;
+}
+.tco-bar-inner {
+  height:100%;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  padding:0 10px;
+  font-size:11px;
+  font-weight:700;
+  color:white;
+  transition: width 1s ease;
+}
+
+/* ========== SECTION DIVIDERS ========== */
+.section-title-bar {
+  background:linear-gradient(90deg, var(--navy), var(--blue));
+  color:white;
+  padding:7px 16px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:10px;
+  display:flex; align-items:center; gap:8px;
+}
+.section-no {
+  background:rgba(255,255,255,.2);
+  width:20px; height:20px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:800;
+}
+
+/* ========== NEXT STEPS ========== */
+.next-step-item {
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+.next-step-item:last-child { border-bottom:none; }
+.ns-num {
+  width:28px; height:28px;
+  background:var(--navy);
+  color:white;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:700;
+  flex-shrink:0;
+  margin-top:2px;
+}
+.ns-body h4 {
+  font-size:14px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+.ns-body p {
+  font-size:12px;
+  color:var(--sub);
+  line-height:1.6;
+}
+
+/* ========== CLOSING ========== */
+#s7 .slide-body {
+  background: linear-gradient(145deg, #0f2a4a, #1a5fa8);
+  justify-content:center;
+  align-items:center;
+}
+.closing-inner {
+  text-align:center;
+  color:white;
+  padding:40px;
+}
+.closing-inner h2 {
+  font-size:36px;
+  font-weight:800;
+  margin-bottom:14px;
+  letter-spacing:-1px;
+}
+.closing-inner p {
+  font-size:16px;
+  color:rgba(255,255,255,.7);
+  margin-bottom:30px;
+  line-height:1.7;
+}
+.closing-contact {
+  display:inline-flex;
+  gap:30px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:12px;
+  padding:16px 32px;
+  font-size:13px;
+  color:rgba(255,255,255,.85);
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAVIGATION -->
+<div class="topnav">
+  <div class="topnav-left">
+    <div class="logo-dot">P</div>
+    <span class="topnav-title">PopcornSAR × テクノプロ — 2026.03.16</span>
+  </div>
+  <div class="topnav-center" id="navDots"></div>
+  <div class="topnav-right">
+    <button class="nav-btn" onclick="prevSlide()">← 前へ</button>
+    <span class="slide-counter" id="slideCounter">1 / 7</span>
+    <button class="nav-btn" onclick="nextSlide()">次へ →</button>
+  </div>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- ========== SLIDE 0: COVER ========== -->
+<div class="slide" id="s0">
+  <div class="slide-body">
+    <div class="cover-bg-circle" style="width:600px;height:600px;top:-200px;right:-150px;"></div>
+    <div class="cover-bg-circle" style="width:300px;height:300px;bottom:-80px;left:-80px;"></div>
+    <div class="cover-inner">
+      <div class="cover-badge">AGENDA PROPOSAL · 2026.03.16</div>
+      <div class="cover-main">PARVIS<br>ご提案</div>
+      <div class="cover-sub">テクノプロ × PopcornSAR<br>フォローアップミーティング</div>
+      <div class="cover-divider"></div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <strong>日時</strong>
+          2026年3月16日（月）
+        </div>
+        <div class="cover-meta-item">
+          <strong>方式</strong>
+          Teams オンライン
+        </div>
+        <div class="cover-meta-item">
+          <strong>議題数</strong>
+          4 Agendas
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 2: AGENDA 1 ─ CONTRACT ========== -->
+<div class="slide" id="s2">
+  <div class="slide-body">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <span class="agenda-badge">AGENDA 1</span>
+        <span class="slide-title">PARVIS 料金体系・契約内容</span>
+      </div>
+    </div>
+    <div class="slide-content">
+
+      <!-- KPI row -->
+      <div class="grid-4">
+        <div class="kpi">
+          <div class="kpi-value kpi-accent">¥12M</div>
+          <div class="kpi-label">年間ライセンス<br>5名1チーム</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value" style="color:var(--sub); font-size:20px;">¥200K</div>
+          <div class="kpi-label">1名あたり月額<br>換算単価</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value kpi-green" style="font-size:22px;">¥0</div>
+          <div class="kpi-label">追加インフラ<br>コスト</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value" style="font-size:18px; color:var(--navy);">1/10</div>
+          <div class="kpi-label">他社開発方式<br>比コスト比率</div>
+        </div>
+      </div>
+
+      <!-- Contract Options -->
+      <div class="grid-2" style="margin-top:2px;">
+        <div class="contract-card">
+          <div class="contract-title">年間契約</div>
+          <div class="contract-price">¥12,000,000</div>
+          <div class="contract-unit">/ 1チーム（5名）・1年</div>
+          <ul class="check-list">
+            <li>テクニカルサポート（営業日対応）</li>
+            <li>定期アップデート・新機能提供</li>
+            <li>導入コンサルティング（初回）</li>
+            <li>2チーム目以降はボリューム割引適用</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="highlight-box" style="margin-top:4px;">
+        <strong>拡張時の試算（参考）:</strong>&nbsp;
+        100名（20チーム）= <strong>¥2.4億/年</strong> &nbsp;|&nbsp;
+        300名（60チーム）= <strong>¥7.2億/年</strong>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 3: AGENDA 2 ─ EDUCATION ========== -->
+<div class="slide" id="s3">
+  <div class="slide-body">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <span class="agenda-badge">AGENDA 2</span>
+        <span class="slide-title">FDE 教育プラン（PARVISライセンス契約者限定）</span>
+      </div>
+    </div>
+    <div class="slide-content">
+
+      <div class="warn-highlight">
+        <strong>重要:</strong> FDE教育はPARVISライセンス契約済みのお客様のみを対象としています。ライセンスの先行契約が必要です。<br>
+        <strong>最小実施規模:</strong> 1コース10名以上からお申し込みいただけます。<br>
+        <strong>実施方式:</strong> 教育は全てオンサイト（現場訪問）形式で行います。実際の業務環境で直接ご指導することで、習得効果を最大化します。
+      </div>
+
+      <div class="grid-3">
+
+        <div class="edu-card">
+          <div class="edu-lv-badge" style="background:#1e8a5a;">LV2 — Basic</div>
+          <div style="font-size:11px; color:var(--sub); margin-bottom:8px;">初級〜中級エンジニア対象</div>
+          <div class="edu-price" style="color:#1e8a5a;">¥190,000</div>
+          <div class="edu-unit">1名 × 1日</div>
+          <div style="border-top:1px solid var(--border); padding-top:10px; margin-top:4px;">
+            <div style="font-size:12px; color:var(--text); margin-bottom:6px; font-weight:600;">カリキュラム</div>
+            <div style="font-size:11px; color:var(--sub); line-height:1.7;">PARVIS基本操作<br>標準設計フロー<br>ユースケース演習</div>
+          </div>
+          <div class="edu-total" style="color:#1e8a5a;">
+            10名 × 5日合計: <span style="font-size:18px;">¥19,000,000</span>
+          </div>
+        </div>
+
+        <div class="edu-card" style="border-color:var(--sky);">
+          <div class="edu-lv-badge" style="background:var(--sky);">LV3 — Advanced</div>
+          <div style="font-size:11px; color:var(--sub); margin-bottom:8px;">中級〜上級エンジニア対象</div>
+          <div class="edu-price" style="color:var(--sky);">¥250,000</div>
+          <div class="edu-unit">1名 × 1日</div>
+          <div style="border-top:1px solid var(--border); padding-top:10px; margin-top:4px;">
+            <div style="font-size:12px; color:var(--text); margin-bottom:6px; font-weight:600;">カリキュラム</div>
+            <div style="font-size:11px; color:var(--sub); line-height:1.7;">高度設計手法<br>カスタマイゼーション<br>プロセス最適化</div>
+          </div>
+          <div class="edu-total" style="color:var(--sky);">
+            10名 × 5日合計: <span style="font-size:18px;">¥25,000,000</span>
+          </div>
+        </div>
+
+        <div class="edu-card" style="border-color:var(--accent);">
+          <div class="edu-lv-badge" style="background:var(--accent);">LV4 — Expert</div>
+          <div style="font-size:11px; color:var(--sub); margin-bottom:8px;">シニア・リードエンジニア対象</div>
+          <div class="edu-price" style="color:var(--accent);">¥320,000</div>
+          <div class="edu-unit">1名 × 1日</div>
+          <div style="border-top:1px solid var(--border); padding-top:10px; margin-top:4px;">
+            <div style="font-size:12px; color:var(--text); margin-bottom:6px; font-weight:600;">カリキュラム</div>
+            <div style="font-size:11px; color:var(--sub); line-height:1.7;">アーキテクチャ設計<br>チーム指導法<br>高度運用・展開</div>
+          </div>
+          <div class="edu-total" style="color:var(--accent);">
+            10名 × 5日合計: <span style="font-size:18px;">¥32,000,000</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Travel cost -->
+      <div class="card">
+        <div class="card-title">
+          <span class="dot" style="background:var(--accent)"></span>
+          オンサイト実施時の付帯費用（別途）
+        </div>
+        <div class="grid-2">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="text-align:left;">費用区分</th>
+                <th>請求単位</th>
+                <th>金額</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-left td-bold">滞在コスト<br><span style="font-size:10px; font-weight:400; color:var(--sub);">（講師1名あたり）</span></td>
+                <td>1日</td>
+                <td class="td-price">¥100,000</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="highlight-box" style="margin:0;">
+            航空券・宿泊・現地交通費を含む合理的な設定です。
+            具体的な実施日程・講師数は別途ご調整いたします。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 4: AGENDA 3 ─ INFRASTRUCTURE ========== -->
+<div class="slide" id="s4">
+  <div class="slide-body">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <span class="agenda-badge">AGENDA 3</span>
+        <span class="slide-title">導入に伴う必要インフラ</span>
+      </div>
+    </div>
+    <div class="slide-content">
+
+      <div class="highlight-box">
+        <strong>結論:</strong> テクノプロ様がClaudeEnterpriseを4月に導入予定であれば、PARVISのために<strong>追加インフラはほぼ不要</strong>です。既存の投資をそのまま活用できます。
+      </div>
+
+      <!-- Architecture -->
+      <div class="section-title-bar"><span class="section-no">1</span> PARVISシステムアーキテクチャ</div>
+      <div class="arch-row">
+        <div class="arch-col" style="background:#e8f4fd;">
+          <div class="arch-col-hd" style="background:var(--sky);">Claude Enterprise<br>（既存導入）</div>
+          <div class="arch-col-body">
+            APIサーバー<br>
+            モデルホスティング<br>
+            トークン管理<br>
+            セキュリティ管理
+          </div>
+          <div class="arch-col-cost" style="color:var(--sky);">¥0 追加</div>
+        </div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-col" style="background:#e8f5ee;">
+          <div class="arch-col-hd" style="background:var(--green);">PARVISエージェント<br>（Claude連携）</div>
+          <div class="arch-col-body">
+            車両特化エージェント<br>
+            業種別ロジック<br>
+            Claude連携<br>
+            カスタム設定
+          </div>
+          <div class="arch-col-cost" style="color:var(--green);">ライセンス料のみ</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-col" style="background:#f8f9fa;">
+          <div class="arch-col-hd">エンジニア側<br>（ブラウザ）</div>
+          <div class="arch-col-body">
+            Webブラウザ<br>
+            モバイルアプリ<br>
+            IDE統合<br>
+            既存ツール連携
+          </div>
+          <div class="arch-col-cost" style="color:var(--sub);">追加設定 最小</div>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="section-title-bar" style="margin-top:4px;"><span class="section-no">2</span> インフラ比較：他社開発方式 vs PARVIS方式</div>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="text-align:left; width:20%;">項目</th>
+            <th style="width:38%;">他社（スクラッチ開発方式）</th>
+            <th style="width:38%;">PARVIS（Claude連携方式）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-left td-bold">サーバー</td>
+            <td class="td-red" style="font-size:12px;">独立サーバー構築必要<br><span style="font-size:11px; font-weight:400; color:var(--sub);">GPU・CPU・RAM 含む / 数千万円〜</span></td>
+            <td class="td-green" style="font-size:12px;">Claude Enterpriseのみ使用<br><span style="font-size:11px; font-weight:400; color:var(--sub);">追加インフラ費用 ¥0</span></td>
+          </tr>
+          <tr>
+            <td class="td-left td-bold">AIモデル</td>
+            <td class="td-red" style="font-size:12px;">別途開発・調達が必要<br><span style="font-size:11px; font-weight:400; color:var(--sub);">月数百万円〜</span></td>
+            <td class="td-green" style="font-size:12px;">Claude Enterpriseを活用<br><span style="font-size:11px; font-weight:400; color:var(--sub);">既存ライセンス内で完結</span></td>
+          </tr>
+          <tr>
+            <td class="td-left td-bold">開発期間</td>
+            <td class="td-red" style="font-size:12px;">6ヶ月〜1年<br><span style="font-size:11px; font-weight:400; color:var(--sub);">設計・構築・テスト含む</span></td>
+            <td class="td-green" style="font-size:12px;">1〜2週間で稼働開始<br><span style="font-size:11px; font-weight:400; color:var(--sub);">設定・統合のみ</span></td>
+          </tr>
+          <tr>
+            <td class="td-left td-bold">保守運用</td>
+            <td class="td-red" style="font-size:12px;">専任チームが必要<br><span style="font-size:11px; font-weight:400; color:var(--sub);">月次インフラ管理コスト発生</span></td>
+            <td class="td-green" style="font-size:12px;">PopcornSARが管理<br><span style="font-size:11px; font-weight:400; color:var(--sub);">テクノプロ側の追加負担ゼロ</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 5: AGENDA 4 ─ TCO ========== -->
+<div class="slide" id="s5">
+  <div class="slide-body">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <span class="agenda-badge">AGENDA 4</span>
+        <span class="slide-title">Gen AIエンジンライセンス費用 ── TCO（総保有コスト）比較</span>
+      </div>
+    </div>
+    <div class="slide-content">
+
+      <div class="highlight-box">
+        <strong>ポイント:</strong> PARVISライセンス料にGen AIエンジン費用は含まれていません。テクノプロ様がご準備されるClause Enterpriseがエンジンを担うため、<strong>AIエンジン追加費用は¥0</strong>です。
+      </div>
+
+      <div class="grid-2" style="align-items:start;">
+
+        <!-- Cost breakdown table -->
+        <div>
+          <div class="section-title-bar"><span class="section-no">1</span> コスト構成比較</div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="text-align:left;">コスト項目</th>
+                <th>PARVIS方式</th>
+                <th>スクラッチ開発</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-left td-bold">エージェントライセンス</td>
+                <td class="td-green">¥1,200万/年<br><span style="font-size:10px;">(5名1チーム)</span></td>
+                <td class="td-red">数億円〜<br><span style="font-size:10px;">(開発費)</span></td>
+              </tr>
+              <tr>
+                <td class="td-left td-bold">Gen AIエンジン費用</td>
+                <td class="td-green">¥0<br><span style="font-size:10px;">(Claude Enterprise活用)</span></td>
+                <td class="td-red">月数百万円<br><span style="font-size:10px;">(別途AIエンジン費用)</span></td>
+              </tr>
+              <tr>
+                <td class="td-left td-bold">インフラ費用</td>
+                <td class="td-green">¥0<br><span style="font-size:10px;">(Claude連携)</span></td>
+                <td class="td-red">数千万円<br><span style="font-size:10px;">(サーバー構築)</span></td>
+              </tr>
+              <tr style="background:#fff8e6;">
+                <td class="td-left td-bold" style="color:var(--navy);">年間TCO（総保有コスト）</td>
+                <td class="td-green" style="font-size:16px;">¥1,200万</td>
+                <td class="td-red" style="font-size:16px;">数億円〜</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Visual bars -->
+        <div>
+          <div class="section-title-bar"><span class="section-no">2</span> TCOビジュアル比較</div>
+          <div class="tco-block">
+            <div class="tco-title">
+              <span style="color:var(--green)">■</span> 年間 TCO（Total Cost of Ownership）
+            </div>
+
+            <div class="tco-bar-wrap">
+              <div class="tco-bar-label">
+                <span style="font-weight:700; color:var(--green);">PARVIS方式</span>
+                <span style="color:var(--green); font-weight:700;">¥1,200万</span>
+              </div>
+              <div class="tco-bar-outer">
+                <div class="tco-bar-inner" style="width:18%; background:var(--green);">¥1,200万</div>
+              </div>
+            </div>
+
+            <div class="tco-bar-wrap" style="margin-top:12px;">
+              <div class="tco-bar-label">
+                <span style="font-weight:700; color:var(--red);">スクラッチ開発（参考）</span>
+                <span style="color:var(--red); font-weight:700;">¥5,000万〜数億円</span>
+              </div>
+              <div class="tco-bar-outer">
+                <div class="tco-bar-inner" style="width:82%; background:var(--red);">¥5,000万〜数億円</div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px; padding:12px; background:#e8f5ee; border-radius:8px; text-align:center;">
+              <div style="font-size:22px; font-weight:800; color:var(--green);">最大 1/10 以下</div>
+              <div style="font-size:12px; color:var(--sub); margin-top:4px;">PARVIS方式のコスト優位性（年間TCO比較）</div>
+            </div>
+          </div>
+
+          <div class="warn-highlight" style="margin-top:12px;">
+            <strong>Claude Enterpriseとの相乗効果:</strong><br>
+            テクノプロ様が4月に導入予定のClaudeが「AIエンジン」となるため、PARVIS導入時の純増コストは ライセンス費用（¥1,200万/年）のみです。
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 6: NEXT STEPS ========== -->
+<div class="slide" id="s6">
+  <div class="slide-body">
+    <div class="slide-header">
+      <div class="slide-header-left">
+        <span class="agenda-badge">NEXT STEPS</span>
+        <span class="slide-title">今後のアクションプラン</span>
+      </div>
+    </div>
+    <div class="slide-content">
+
+      <div class="grid-2">
+        <div>
+          <div class="section-title-bar"><span class="section-no">1</span> 推奨アクション</div>
+          <div class="card">
+            <div class="next-step-item">
+              <div class="ns-num">1</div>
+              <div class="ns-body">
+                <h4>契約条件・スコープの最終合意</h4>
+                <p>年間 or 6ヶ月、チーム規模、開始時期について本日中に方向性を確認。4月稼働に向けた逆算スケジュールを設定します。</p>
+              </div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-num">2</div>
+              <div class="ns-body">
+                <h4>契約書ドラフトの送付</h4>
+                <p>合意内容を反映した契約書初稿を1週間以内にお送りします。テクノプロ様の法務・調達部門との確認に備えたドラフトをご提供します。</p>
+              </div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-num">3</div>
+              <div class="ns-body">
+                <h4>FDE教育プランのカスタマイズ提案</h4>
+                <p>AICOE 5名の方々のスキルレベルと業務内容に合わせた最適なレベル構成・スケジュールをご提案します。正式見積もりも併せて提出します。</p>
+              </div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-num">4</div>
+              <div class="ns-body">
+                <h4>インフラ要件チェックリストの提供</h4>
+                <p>IT部門向けのPARVIS導入要件書（1〜2ページ）をご提供します。Claude Enterprise連携の確認事項を網羅した簡潔な書類です。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 7: CLOSING ========== -->
+<div class="slide" id="s7">
+  <div class="slide-body">
+    <div class="closing-inner">
+      <div class="cover-badge" style="margin-bottom:20px;">THANK YOU</div>
+      <h2>ご質問・ご確認事項を<br>お聞かせください</h2>
+      <p>本日の4つのアジェンダについて、<br>不明点や追加確認事項がございましたら、お気軽にご質問ください。<br>引き続きテクノプロ様のAI戦略の実現に向け、全力でサポートいたします。</p>
+      <div class="closing-contact">
+        <div>
+          <div style="font-size:11px; opacity:.6; margin-bottom:2px;">会社</div>
+          <div>PopcornSAR</div>
+        </div>
+        <div>
+          <div style="font-size:11px; opacity:.6; margin-bottom:2px;">日付</div>
+          <div>2026年3月16日</div>
+        </div>
+        <div>
+          <div style="font-size:11px; opacity:.6; margin-bottom:2px;">ミーティング</div>
+          <div>Teams オンライン</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#deck -->
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+function initNav() {
+  const dotsEl = document.getElementById('navDots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  }
+}
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, total - 1));
+  slides[current].classList.add('active');
+  document.querySelectorAll('.nav-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  document.getElementById('slideCounter').textContent = (current + 1) + ' / ' + total;
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+});
+
+initNav();
+goTo(0);
+</script>
+</body>
+</html>
